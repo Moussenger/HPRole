@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "dev_port": 8080   
+    },
+
+    "frontend": {
+        "viewengine": "jade",
+        
+        "dirs": {
+            "views": "frontend/views",
+            "public": "frontend/public"
+        }
+    }
+}
