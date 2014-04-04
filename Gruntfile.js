@@ -1,6 +1,9 @@
 module.exports = function(grunt) {
 
     grunt.initConfig({
+        jasmine_node : {
+            all: ["tests/backend/controllers/"]
+        },
         karma: {
             unit: {
                 configFile: 'config/karma.conf.js',
@@ -9,7 +12,6 @@ module.exports = function(grunt) {
         },
         watch: {
             karma: {
-                files: ['src/**/*.js', 'test/unit/**/*.js'],
                 tasks: ['karma:unit:run']
             }
         },
@@ -34,6 +36,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-jasmine-node');
 
     grunt.registerTask('devmode', ['karma:unit', 'watch']);
 };

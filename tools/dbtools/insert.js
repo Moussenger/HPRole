@@ -33,7 +33,7 @@ exports.execute = function (argv) {
                 "name"       : data[i].name,
                 "class"      : data[i].class,
                 "level"      : data[i].level,
-                "no-wand"    : data[i]["no-wand"],
+                "nowand"    : data[i]["no-wand"],
                 "description": data[i].description
             });
 
