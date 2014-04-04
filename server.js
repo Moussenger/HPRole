@@ -8,7 +8,7 @@ var express         = require('express'),
     mongoose        = require("mongoose"),
     models          = require("./backend/models/models"),
     homeController  = require("./backend/controllers/home"),
-    apiController   = require("./backend/controllers/api");
+    apiController   = require("./backend/controllers/api/api");
 
 
 /**
@@ -51,7 +51,7 @@ app.use(express.errorHandler());
  */
 
 app.get('/', homeController.index);
-app.get('/api/spell/:name', api.findSpellByName);
+app.get('/api/spells/:name', apiController.spells.findSpellByName);
 
 
 /**

@@ -1,5 +1,5 @@
 var mongoose = require("mongoose"),
-    Spell    = mongoose.model("Spell"); 
+    Spell    = mongoose.model("Spell"),
     api      = {};
 
 
@@ -19,5 +19,4 @@ api.findSpellByName = function (req, res) {
     });
 }
 
-
-exports = api;
+module.exports = api;
