@@ -1,11 +1,15 @@
-var fs = require("fs");
+require("../../backend/models/spell.js");
+
+var fs       = require("fs"),
+    config   = require("../../config/config.js"),
+    mongoose = require("mongoose"),
+    Spell    = mongoose.model("Spell");
 
 exports.execute = function (argv) {
     try {
         var i          = 0; 
             file       = argv[i++],
-            collection = argv[i++],
-            pos        = argv[i++];
+            collection = argv[i++];
 
         if(!file || !collection) throw "missed arguments";
     } catch (err) {
@@ -13,18 +17,31 @@ exports.execute = function (argv) {
         return;
     }
 
+    mongoose.connect(config.dbURI, config.conf.mongoose);
+
     fs.readFile(file, "utf8", function (err, text) {
-        var data;
+        var data = JSON.parse(text),
+            spell;
 
         if(err) {
             console.log("ERROR: Cant read '" + file + "' file");
             return;
         }
 
-        data = JSON.parse(text);
-        console.log(data[pos].name);
-        console.log(data[pos].class);
-        console.log(data[pos].description);
+        for(var i = 0, length = data.length; i< length; i++) {
+            spell = new Spell({
+                "name"       : data[i].name,
+                "class"      : data[i].class,
+                "level"      : data[i].level,
+                "no-wand"    : data[i]["no-wand"],
+                "description": data[i].description
+            });
+
+            spell.create();
+        }
+        
     });
+
+    mongoose.connection.close();
 
 }

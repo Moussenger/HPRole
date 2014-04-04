@@ -18,5 +18,9 @@
             "views": "frontend/views",
             "public": "frontend/public"
         }
+    },
+
+    "mongoose": {
+        "keepAlive": 1
     }
 }
