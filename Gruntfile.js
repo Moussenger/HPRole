@@ -13,6 +13,10 @@ module.exports = function(grunt) {
         watch: {
             karma: {
                 tasks: ['karma:unit:run']
+            },
+            less: {
+                files: "./frontend/dev/less/**/*.less",
+                tasks: ["less"]
             }
         },
         less: {
