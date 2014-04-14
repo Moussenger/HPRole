@@ -2,13 +2,14 @@
  * Module dependencies.
  */
 
-var express         = require('express'),
-    path            = require("path"),
-    config          = require("./config/config.js"),
-    mongoose        = require("mongoose"),
-    models          = require("./backend/models/models"),
-    homeController  = require("./backend/controllers/home"),
-    apiController   = require("./backend/controllers/api/api");
+var express             = require('express'),
+    path                = require("path"),
+    config              = require("./config/config.js"),
+    mongoose            = require("mongoose"),
+    models              = require("./backend/models/models"),
+    homeController      = require("./backend/controllers/home"),
+    partialsController  = require("./backend/controllers/partials"),
+    apiController       = require("./backend/controllers/api/api");
 
 
 /**
@@ -37,7 +38,7 @@ app.set('port', process.env.PORT || config.conf.dev.dev_port);
 app.set('views', path.join(__dirname, config.conf.frontend.dirs.views));
 app.set('view engine', config.conf.frontend.viewengine);
 app.use(express.compress());
-app.use(express.favicon());
+app.use(express.favicon("frontend/public/img/favicon.ico"));
 app.use(express.logger('dev'));
 app.use(express.cookieParser());
 app.use(express.urlencoded())
@@ -51,6 +52,7 @@ app.use(express.errorHandler());
  */
 
 app.get('/', homeController.index);
+app.get('/partials/:view', partialsController.dispatch);
 app.get('/api/spells/:name', apiController.spells.findSpellByName);
 
 
